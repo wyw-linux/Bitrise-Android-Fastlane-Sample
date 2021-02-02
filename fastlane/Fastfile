@@ -29,7 +29,7 @@ platform :android do
     gradle(task: ":app:lintDebug")
 
     if is_ci
-      sh("cp ./app/build/reports/lint-results-debug.html $BITRISE_DEPLOY_DIR/app-lint-results-debug.html")
+      sh("cp $FASTLANE_WORK_DIR/app/build/reports/lint-results-debug.html $BITRISE_DEPLOY_DIR/app-lint-results-debug.html")
     end
   end
 
@@ -37,8 +37,8 @@ platform :android do
     gradle(task: ":app:testDebugUnitTest")
 
     if is_ci
-      sh("zip -r $BITRISE_DEPLOY_DIR/app-tests-html.zip ./app/build/reports/tests")
-      sh("zip -r $BITRISE_DEPLOY_DIR/app-tests-xml.zip ./app/build/test-results")
+      sh("zip -r $BITRISE_DEPLOY_DIR/app-tests-html.zip $FASTLANE_WORK_DIR/app/build/reports/tests")
+      sh("zip -r $BITRISE_DEPLOY_DIR/app-tests-xml.zip $FASTLANE_WORK_DIR/app/build/test-results")
     end
   end
 
