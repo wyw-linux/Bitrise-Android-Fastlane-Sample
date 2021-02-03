@@ -25,23 +25,24 @@ platform :android do
     unit_test
   end
 
+  desc "Lint debug variant"
   lane :lint do
     gradle(task: ":app:lintDebug")
 
     if is_ci
-      sh("pwd")
-      sh("ls $FASTLANE_WORK_DIR")
-      sh("ls $FASTLANE_WORK_DIR/../app/build/reports/")
-      sh("cp $FASTLANE_WORK_DIR/../app/build/reports/lint-results-debug.html $BITRISE_DEPLOY_DIR/app-lint-results-debug.html")
+      desc "Copy lint report to artifacts"
+      sh("cp $FASTLANE_WORK_DIR/app/build/reports/lint-results-debug.html $BITRISE_DEPLOY_DIR/app-lint-results-debug.html")
     end
   end
 
+  desc "Run unit tests on debug variant"
   lane :unit_test do
     gradle(task: ":app:testDebugUnitTest")
 
     if is_ci
-      sh("zip -r $BITRISE_DEPLOY_DIR/app-tests-html.zip $FASTLANE_WORK_DIR/../app/build/reports/tests")
-      sh("zip -r $BITRISE_DEPLOY_DIR/app-tests-xml.zip $FASTLANE_WORK_DIR/../app/build/test-results")
+      desc "Copy test report to artifacts"
+      sh("zip -r $BITRISE_DEPLOY_DIR/app-tests-html.zip $FASTLANE_WORK_DIR/app/build/reports/tests")
+      sh("zip -r $BITRISE_DEPLOY_DIR/app-tests-xml.zip $FASTLANE_WORK_DIR/app/build/test-results")
     end
   end
 
