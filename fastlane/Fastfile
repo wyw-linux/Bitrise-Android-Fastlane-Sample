@@ -29,6 +29,9 @@ platform :android do
     gradle(task: ":app:lintDebug")
 
     if is_ci
+      sh("pwd")
+      sh("ls $FASTLANE_WORK_DIR")
+      sh("ls $FASTLANE_WORK_DIR/app/build/reports/")
       sh("cp $FASTLANE_WORK_DIR/app/build/reports/lint-results-debug.html $BITRISE_DEPLOY_DIR/app-lint-results-debug.html")
     end
   end
