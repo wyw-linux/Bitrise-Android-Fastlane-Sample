@@ -30,7 +30,7 @@ platform :android do
     gradle(task: ":app:lintDebug")
 
     if is_ci
-      desc "Copy lint report to artifacts"
+      # Copy lint report to artifact directory. This will show up on the "Apps & Artifacts tab on the build page"
       sh("cp $FASTLANE_WORK_DIR/../app/build/reports/lint-results-debug.html $BITRISE_DEPLOY_DIR/app-lint-results-debug.html")
     end
   end
@@ -40,7 +40,7 @@ platform :android do
     gradle(task: ":app:testDebugUnitTest")
 
     if is_ci
-      desc "Copy test report to artifacts"
+      # Copy test results to artifact directory. These will show up on the "Apps & Artifacts tab on the build page"
       sh("zip -r $BITRISE_DEPLOY_DIR/app-tests-html.zip $FASTLANE_WORK_DIR/../app/build/reports/tests")
       sh("zip -r $BITRISE_DEPLOY_DIR/app-tests-xml.zip $FASTLANE_WORK_DIR/../app/build/test-results")
     end
