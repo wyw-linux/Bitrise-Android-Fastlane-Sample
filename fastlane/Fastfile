@@ -23,6 +23,7 @@ platform :android do
   lane :primary do
     lint
     unit_test
+    build
   end
 
   desc "Lint debug variant"
@@ -35,6 +36,14 @@ platform :android do
     end
   end
 
+  
+  desc "Build debug and test APK for screenshots"
+  lane :build do
+    gradle(task: 'clean')
+    gradle(task: 'assemble', build_type: 'Debug')
+  end
+  
+  
   desc "Run unit tests on debug variant"
   lane :unit_test do
     gradle(task: ":app:testDebugUnitTest")
