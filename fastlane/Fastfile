@@ -40,7 +40,7 @@ platform :android do
   desc "Build debug and test APK for screenshots"
   lane :build do
     gradle(task: 'clean')
-    gradle(task: 'assemble', build_type: 'Debug')
+    gradle(task: 'assemble', build_type: 'AndroidTest')
   end
   
   
